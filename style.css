@@ -180,7 +180,6 @@ background: linear-gradient(97deg, rgba(2,0,36,1) 0%, rgba(121,9,109,1) 68%, rgb
 .piano-key-active::before {
 	color: #00b4a4;
 }
-
 .fullscreen {
 	position: fixed;
 	top: 120px;
