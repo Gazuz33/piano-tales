@@ -1,8 +1,16 @@
-let keys = document.querySelectorAll('.piano-key');
+const keys = document.querySelectorAll('.piano-key');
+const piano = document.getElementById('piano');
 
-keys.forEach(key => {
- key.addEventListener('click', playNote);
-});
+
+const startNote = (event) => {
+  let key = event.target;
+   let note = document.getElementById(key.dataset.note);
+   key.classList.add('active');
+   note.currentTime = 0;
+   note.play();
+   note.addEventListener('ended');
+}
+
 keys.forEach(key => {
  key.addEventListener('transitionend', removeTransition);
 });
@@ -10,13 +18,31 @@ function removeTransition(e) {
   if (e.propertyName !== 'transform') return;
   this.classList.remove('active');
 }
-function playNote(a) {
- let key = a.target;
- let note = document.getElementById(key.dataset.note);
- key.classList.add('active');
- note.currentTime = 0;
- note.play();
- note.addEventListener('ended',() => {
-  key.classList.remove('active');
- });
+
+const stopNote = (event) => {
+  event.target.classList.remove('active');
 }
+
+const startCorrOver = (event) => {
+  if (event.target.classList.contains('piano-key')) {
+    event.target.classList.add('active');
+  }
+  keys.forEach((elem) => {
+    elem.addEventListener('mousedown', startNote)
+    elem.addEventListener('mouseup', stopNote)
+    elem.addEventListener('mouseover', startNote)
+    elem.addEventListener('mouseout', stopNote)
+  });
+}
+
+const stopCorrOver = () => {
+  keys.forEach((elem) => {
+    elem.classList.remove('active');
+    elem.removeEventListener('mouseover', startNote)
+    elem.removeEventListener('mouseout', stopNote)
+    });
+
+}
+
+piano.addEventListener('mousedown', startCorrOver, false);
+window.addEventListener('mouseup', stopCorrOver)
