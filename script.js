@@ -12,7 +12,7 @@ const startNote = (event) => {
 }
 
 keys.forEach(key => {
- key.addEventListener('transitionend', removeTransition);
+ key.addEventListener('mouseup', removeTransition);
 });
 function removeTransition(e) {
   if (e.propertyName !== 'transform') return;
@@ -23,13 +23,16 @@ const stopNote = (event) => {
   event.target.classList.remove('active');
 }
 
+keys.forEach((elem) => {
+  elem.addEventListener('mousedown', startNote)
+  elem.addEventListener('mouseup', stopNote)
+});
+
 const startCorrOver = (event) => {
   if (event.target.classList.contains('piano-key')) {
     event.target.classList.add('active');
   }
   keys.forEach((elem) => {
-    elem.addEventListener('mousedown', startNote)
-    elem.addEventListener('mouseup', stopNote)
     elem.addEventListener('mouseover', startNote)
     elem.addEventListener('mouseout', stopNote)
   });
@@ -44,5 +47,5 @@ const stopCorrOver = () => {
 
 }
 
-piano.addEventListener('mousedown', startCorrOver, false);
+piano.addEventListener('mousedown', startCorrOver);
 window.addEventListener('mouseup', stopCorrOver)
