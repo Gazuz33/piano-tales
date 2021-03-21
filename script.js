@@ -7,15 +7,6 @@ const startNote = (event) => {
    key.classList.add('active');
    note.currentTime = 0;
    note.play();
-   note.addEventListener('ended');
-}
-
-keys.forEach(key => {
- key.addEventListener('mouseup', removeTransition);
-});
-function removeTransition(e) {
-  if (e.propertyName !== 'transform') return;
-  this.classList.remove('active');
 }
 
 const stopNote = (event) => {
@@ -55,16 +46,14 @@ const stopCorrOver = () => {
   key.classList.add('active');
 }
 
-function removeTransition(e) {
-  if (e.propertyName !== 'transform') return;
-  this.classList.remove('active');
+function stoPNote(e) {
+const key = document.querySelector(`.piano-key[data-key="${e.keyCode}"] `);
+ key.classList.remove('active');
 }
 
-keys.forEach(key => {
- key.addEventListener('transitionend', removeTransition);
-});
 
 window.addEventListener('keydown', playNote);
+window.addEventListener('keyup', stoPNote);
 
 piano.addEventListener('mousedown', startCorrOver);
 window.addEventListener('mouseup', stopCorrOver)
