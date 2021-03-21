@@ -138,7 +138,7 @@ background: linear-gradient(97deg, rgba(2,0,36,1) 0%, rgba(121,9,109,1) 68%, rgb
 	color: #a2abb3;
 	bottom: -45px;
 	left: 20px;
-	/* transition: 0.3s; */
+	transition: 0.07s;
 	pointer-events: none;
 }
 .piano-key::after {
@@ -181,8 +181,9 @@ background: linear-gradient(97deg, rgba(2,0,36,1) 0%, rgba(121,9,109,1) 68%, rgb
 }
 
 .piano-key.active::before {
-color: #00FFFF;
+color: #00c9b7;
 }
+
 .fullscreen {
 	position: fixed;
 	top: 120px;
@@ -202,11 +203,6 @@ color: #00FFFF;
 }
 :-webkit-full-screen .fullscreen {
 	background-image: url("assets/svg/fullscreen-exit.svg");
-}
-.footer {
-	border-top: 1px solid;
-	border-image-slice: 1;
-	border-image-source: linear-gradient(to left, #38495a, #a2abb3, #38495a);
 }
 .footer-container {
 	padding: 0 15px;

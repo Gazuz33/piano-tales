@@ -1,7 +1,6 @@
 const keys = document.querySelectorAll('.piano-key');
 const piano = document.getElementById('piano');
 
-
 const startNote = (event) => {
   let key = event.target;
    let note = document.getElementById(key.dataset.note);
@@ -47,5 +46,33 @@ const stopCorrOver = () => {
 
 }
 
+function playNote(e){
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"] `);
+  const key = document.querySelector(`key[data-key="${e.keyCode}"] `);
+  if (e.repeat) return
+  audio.currentTime = 0;
+  audio.play();
+  key.classList.add('active');
+}
+
+function removeTransition(e) {
+  if (e.propertyName !== 'transform') return;
+  this.classList.remove('active');
+}
+
+ window.addEventListener('keydown', playNote);
 piano.addEventListener('mousedown', startCorrOver);
 window.addEventListener('mouseup', stopCorrOver)
+
+document.querySelector('.fullscreen').addEventListener('click', toggleScreen);
+
+function toggleScreen(){
+  if (!document.fullscreenElement)  {
+    document.documentElement.requestFullscreen();
+  }
+  else {
+    if (document.fullscreenEnabled) {
+      document.exitFullscreen();
+    }
+  }
+}
