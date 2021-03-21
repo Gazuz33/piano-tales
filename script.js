@@ -46,9 +46,9 @@ const stopCorrOver = () => {
 
 }
 
-function playNote(e){
+ function playNote(e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"] `);
-  const key = document.querySelector(`key[data-key="${e.keyCode}"] `);
+  const key = document.querySelector(`.piano-key[data-key="${e.keyCode}"] `);
   if (e.repeat) return
   audio.currentTime = 0;
   audio.play();
@@ -60,7 +60,12 @@ function removeTransition(e) {
   this.classList.remove('active');
 }
 
- window.addEventListener('keydown', playNote);
+keys.forEach(key => {
+ key.addEventListener('transitionend', removeTransition);
+});
+
+window.addEventListener('keydown', playNote);
+
 piano.addEventListener('mousedown', startCorrOver);
 window.addEventListener('mouseup', stopCorrOver)
 
