@@ -70,3 +70,30 @@ function toggleScreen(){
     }
   }
 }
+
+const btnСolection = document.querySelectorAll('.btn');
+const btnFeild = document.querySelector('.btn-container');
+
+btnFeild.addEventListener('click',(event)=> {
+    if(event.target.classList.contains('btn')) {
+    if(!event.target.classList.contains('btn-active')) {
+          btnСolection.forEach((elem)=>{
+    if(event.target === elem) {
+          elem.classList.add('btn-active');
+    if(elem.classList.contains('btn-letters')) {
+          keys.forEach((elem1)=> {
+          elem1.classList.add('piano-key-letter');
+        });
+  }
+  else {
+    keys.forEach((element)=> {
+      element.classList.remove('piano-key-letter');
+      });
+  }
+}   else {
+    elem.classList.remove('btn-active');
+                }
+            });
+        }
+    }
+});
